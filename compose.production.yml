@@ -27,6 +27,7 @@ services:
 
   app:
     image: ${DOSSIER_IMAGE:-ghcr.io/aientech/dossier:latest}
+    platform: linux/amd64
     restart: unless-stopped
     depends_on:
       db:
@@ -61,6 +62,7 @@ services:
       - "127.0.0.1:${DOSSIER_PORT:-3000}:3000"
     volumes:
       - data:/data
+      - .:/workspace
     # Room for Chromium, which prints the PDFs.
     mem_limit: 1g
     # Lets http://host.docker.internal reach Ollama (:11434) or LM Studio
